@@ -1,4 +1,4 @@
-import java.util.Scanner;
+import java.util.Random;
 
 /**
  * App
@@ -6,24 +6,22 @@ import java.util.Scanner;
 public class App {
 
     public static void main(String[] args) {
-        Scanner scan = new Scanner(System.in);
-        System.out.printf("Prazer em conhecê-lo, qual seu nome: ");
-        String nome = scan.nextLine();
+        Batman player1 = new Batman();
+        Coringa player2 = new Coringa();
 
-        Pessoa individuo = new Pessoa();
+        player1.info();
+        player2.info();
 
-        individuo.nome = nome;
-        System.out.format("Olá %s, como está?\n", individuo.nome);
-        
-        String ans = scan.nextLine();
-        if (ans.equals("bem")) {
-            System.out.println("Que bom!\n");
-        } else {
-            System.out.println("Ah, que pena!");
-        }
-        System.out.println("Quantos anos voce tem? ");
-        int idade = scan.nextInt();
-        int nasc = 2022 - idade;
-        System.out.format("Obrigado %s, descobri que você nasceu em %d !", nome, nasc);
+        do {
+            Random x = new Random();
+            int rd = 1 + x.nextInt(6);
+            int dano = player1.golpe(rd);
+            player2.vida = player2.vida - dano;
+            if (player2.vida < 0){
+                player2.vida = 0;
+            }
+            player2.info();
+
+        } while (player2.vida > 0);
     }
-}   
+}
